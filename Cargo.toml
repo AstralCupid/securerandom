@@ -1,6 +1,6 @@
 [package]
 name = "securerand"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "a create that extends getrandom to harden the entropy and provide a more useful api"
 license = "MIT"
