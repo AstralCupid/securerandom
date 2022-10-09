@@ -9,5 +9,5 @@ repository = "https://github.com/AstralCupid/securerandom/"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-getrandom = "0.2"
+getrandom = { version = "0.2", features = ["std"] }
 anyhow = "1.0"

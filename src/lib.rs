@@ -7,11 +7,8 @@ use anyhow::Result;
 // getrandom::getrandom on every call, but the plan is to update this in the future so that
 // randomness is fetched once at init and then securely mutated to improve both performance and
 // also protect against weak/compromised rng from the operating system.
-fn getrandom(dest: &mut [u8]) -> Result<(), Error> {
-    match getrandom::getrandom(dest) {
-        Ok(..) => Ok(()),
-        Err(error) => Err(anyhow!("unable to get entropy from the OS: {}", error)),
-    }
+fn getrandom(dest: &mut [u8]) -> Result<()> {
+    getrandom::getrandom(dest).context("unable to get entropy from the OS")
 }
 
 // rand_u64 will return a u64 that is in the range [lower_bound, upper_bound].
