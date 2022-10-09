@@ -2,7 +2,7 @@
 name = "securerand"
 version = "0.1.0"
 edition = "2021"
-description = "a package that extends getrandom to further harden entropy and also provide a convenient api to access high performance random numbers"
+description = "a create that extends getrandom to harden the entropy and provide a more useful api"
 license = "MIT"
 repository = "https://github.com/AstralCupid/securerandom/"
 
