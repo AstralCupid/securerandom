@@ -164,4 +164,38 @@ mod tests {
             panic!("two was not hit");
         }
     }
+
+    // Perform a statistical test to make sure numbers are distributing evenly. This isn't a
+    // cryptographic test, it's a test  to look for more basic mistakes.
+    #[test]
+    fn check_rand_distribution() {
+        let mut one = 0u64;
+        let mut two = 0u64;
+        let mut three = 0u64;
+        for _ in 0..1_000_000 {
+            match rand_u64(1,3) {
+                Ok(result) => {
+                    if result == 1 {
+                        one += 1;
+                    } else if result == 2 {
+                        two += 1;
+                    } else if result == 3 {
+                        three += 1;
+                    } else {
+                        panic!("{}", result);
+                    }
+                },
+                Err(error) => {
+                    panic!("{}", error);
+                }
+            }
+        }
+
+        // Check that the distribution is good. A typical spread will put more than 332_000 into
+        // each bucket, it's extremely unlikely that you'd ever see a number get 320_000 or less by
+        // chance.
+        if one < 320_000 || two < 320_000 || three < 320_000 {
+            panic!("{} - {} - {}", one, two, three);
+        }
+    }
 }

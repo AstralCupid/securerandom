@@ -2,6 +2,9 @@
 name = "securerand"
 version = "0.1.0"
 edition = "2021"
+description = "a package that extends getrandom to further harden entropy and also provide a convenient api to access high performance random numbers"
+license = "MIT"
+repository = "https://github.com/AstralCupid/securerandom/"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
