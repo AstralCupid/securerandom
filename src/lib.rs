@@ -64,6 +64,26 @@ mod tests {
     // Check for simple off-by-one errors.
     #[test]
     fn catch_off_by_one() {
+        // Try range [1,1]
+        let mut one = false;
+        for _ in 0..1000 {
+            let result = match rand_u64(1, 1) {
+                Ok(result) => result,
+                Err(error) => {
+                    panic!("{}", error);
+                }
+            };
+            if result == 1 {
+                one = true
+            } else {
+                panic!("{}", result);
+            }
+        }
+        if !one {
+            panic!("one was not hit");
+        }
+
+        // Try range [0,1]
         let mut zero = false;
         let mut one = false;
         for _ in 0..1000 {
@@ -86,6 +106,62 @@ mod tests {
         }
         if !one {
             panic!("one was not hit");
+        }
+
+        // Try range [1,2]
+        let mut one = false;
+        let mut two = false;
+        for _ in 0..1000 {
+            let result = match rand_u64(1, 2) {
+                Ok(result) => result,
+                Err(error) => {
+                    panic!("{}", error);
+                }
+            };
+            if result == 1 {
+                one = true
+            } else if result == 2 {
+                two = true
+            } else {
+                panic!("{}", result);
+            }
+        }
+        if !one {
+            panic!("one was not hit");
+        }
+        if !two {
+            panic!("two was not hit");
+        }
+
+        // Try range [0,2]
+        let mut zero = false;
+        let mut one = false;
+        let mut two = false;
+        for _ in 0..1000 {
+            let result = match rand_u64(0, 2) {
+                Ok(result) => result,
+                Err(error) => {
+                    panic!("{}", error);
+                }
+            };
+            if result == 0 {
+                zero = true
+            } else if result == 1 {
+                one = true
+            } else if result == 2 {
+                two = true
+            } else {
+                panic!("{}", result);
+            }
+        }
+        if !zero {
+            panic!("zero was not hit");
+        }
+        if !one {
+            panic!("one was not hit");
+        }
+        if !two {
+            panic!("two was not hit");
         }
     }
 }
